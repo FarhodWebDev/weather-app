@@ -2,19 +2,44 @@ const changeLocation = document.getElementById("change-location");
 const card = document.getElementById("card");
 const details = document.getElementById("details");
 const weatherIcon = document.getElementById("weather-icon");
+const errorTxt = document.getElementById("errortxt");
+const formBtn = document.getElementById("formBtn");
 
 changeLocation.addEventListener("submit", (e) => {
  e.preventDefault();
 
- let city = changeLocation.city.value.trim();
+ if (!!changeLocation.city.value) {
+  let city = changeLocation.city.value.trim();
 
- city = city.charAt().toUpperCase() + city.slice(1).toLowerCase();
+  city = city.charAt().toUpperCase() + city.slice(1).toLowerCase();
 
- changeLocation.reset();
+  changeLocation.reset();
 
- getData(city)
-  .then((data) => addUI(data))
-  .catch((err) => console.log(err));
+  getData(city)
+   .then((data) => addUI(data))
+   .catch((err) => {
+    errorTxt.innerText = "Network error.";
+    errorTxt.classList.remove("d-none");
+    overlay.setAttribute("class", "overlay d-none");
+
+    console.log(err);
+
+    setTimeout(() => {
+     errorTxt.classList.add("d-none");
+     errorTxt.innerText = "Enter city or country name";
+    }, 2500);
+   });
+ } else {
+  changeLocation.city.classList.add("is-invalid");
+  errorTxt.classList.remove("d-none");
+  formBtn.classList.add("disabled");
+
+  setTimeout(() => {
+   changeLocation.city.classList.remove("is-invalid");
+   errorTxt.classList.add("d-none");
+   formBtn.classList.remove("disabled");
+  }, 2000);
+ }
 });
 
 const addUI = (val) => {

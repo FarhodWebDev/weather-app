@@ -26,12 +26,20 @@
    <h1 class="my-5">Farhod's Weather</h1>
 
    <form id="change-location" class="text-muted">
-    <label class="mb-2" for="city">
+    <label class="mb-2 fs-5" for="city">
      Enter a location for weather forecast
     </label>
 
     <input type="text" name="city" class="form-control" autocomplete="off" />
-    <button class="btn btn-outline-success form-control mt-3 d-xl-none">
+
+    <div class="text-danger fs-6 mt-2 d-none" id="errortxt">
+     Enter city or country name
+    </div>
+
+    <button
+     class="btn btn-outline-success form-control mt-3 d-xl-none"
+     id="formBtn"
+    >
      Search
     </button>
    </form>

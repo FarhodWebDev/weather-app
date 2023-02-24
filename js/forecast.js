@@ -12,12 +12,6 @@ const keys = {
 
 let KEY = keys.API1;
 
-/**
- * 
-let KEY2 = "";
-let KEY3 = "";
- */
-
 const getData = async (city) => {
  overlay.setAttribute("class", "overlay d-flex");
 
@@ -44,12 +38,9 @@ switcher.addEventListener("change", () => {
  let api = switcher.value;
  if (switcher.value != "API1") {
   KEY = keys[api];
-
-  console.log(KEY);
-  console.log(keys);
  }
 });
 
 window.addEventListener("offline", (e) => {
- alert("Connection lost, please try enable connection!");
+ alert("Connection lost, please try again later!");
 });
